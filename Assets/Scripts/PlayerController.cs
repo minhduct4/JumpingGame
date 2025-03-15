@@ -21,8 +21,15 @@ public class PlayerController : MonoBehaviour
     {
         HandleMove();
         HandleJump();
+        HandleAttack();
     }
-
+    private void HandleAttack()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            animator.SetTrigger("attack");
+        }
+    }
     private void HandleMove()
     {
         float moveDirection = Input.GetAxis("Horizontal");
