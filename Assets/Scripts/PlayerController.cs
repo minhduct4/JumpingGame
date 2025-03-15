@@ -8,11 +8,12 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpSpeed = 5f;
     public bool isOnGround = false;
+    private float heath = 100f; 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>(); 
     }
 
     // Update is called once per frame
@@ -40,10 +41,17 @@ public class PlayerController : MonoBehaviour
             rigidbody2D.linearVelocity = new Vector2(rigidbody2D.linearVelocity.x, jumpSpeed);
             isOnGround = false;
             animator.SetTrigger("jump");
+            SoundManager.Instance.PlayAudio(SoundManager.Instance.jumpSound);
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.transform.tag == "Ground") isOnGround = true;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        heath -= damage;
+        UIManager.Instance.SetHeathText(heath.ToString());
     }
 }

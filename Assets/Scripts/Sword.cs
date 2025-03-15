@@ -1,20 +1,17 @@
 ﻿using UnityEngine;
 
-public class Sword : MonoBehaviour
-{
+public class Sword : Weapon
+{ 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected override void Start()
     {
-        
+        base.Start();
+        damage = 20f;
     }
-
-    // Update is called once per frame
-    void Update()
+     
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
+        base.OnTriggerEnter2D (collision);
         if (collision.CompareTag("Player"))
         {
             Debug.Log("Đã chém trúng player");
